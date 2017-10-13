@@ -15,17 +15,7 @@ Rails.application.routes.draw do
     resources :reviews, only: [:create]
   end
   resources :categories, only: [:show]
-
-  #resources :reviews
   
-  # create a review, edit your review, delete your review
-  # Paths to consider:
-  # GET     /products
-  # GET     /products/:id
-  # POST    /reviews        or   /products/:product_id/reviews? 
-  # PUT     /reviews/:id
-  # DELETE  /reviews/:id
-
 
   resource :cart, only: [:show] do
     put    :add_item
