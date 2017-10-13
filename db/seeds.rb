@@ -92,7 +92,7 @@ cat2.products.create!({
   price: 164.49
 })
 
-cat2.products.create!({
+@hotdog_slicer = cat2.products.create!({
   name:  'Hotdog Slicer',
   description: Faker::Hipster.paragraph(4),
   image: open_asset('electronics2.jpg'),
@@ -135,29 +135,19 @@ cat3.products.create!({
 
 Review.destroy_all
 
-reviews.create! ({
-  product_id: 1,
+@hotdog_slicer.reviews.create! ({
   user_id: 1,
   description: "Amaaazing stuff",
   rating: 5
 })
 
-reviews.create! ({
-  product_id: 1,
+@hotdog_slicer.reviews.create! ({
   user_id: 4,
   description: "Eh, I was not impressed...",
   rating: 2
 })
 
-reviews.create! ({
-  product_id: 2,
-  user_id: 1,
-  description: "It works alright",
-  rating: 3
-})
-
-reviews.create! ({
-  product_id: 1,
+@hotdog_slicer.reviews.create! ({
   user_id: 2,
   description: "What's the return policy?",
   rating: 1
