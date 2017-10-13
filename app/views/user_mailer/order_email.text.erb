@@ -1,0 +1,18 @@
+Thank you for ordering through Jungle, <%= @user.try(:first_name) %>
+===============================================
+ 
+Thank you for making a purchase at Jungle!
+You can log in to our site with your username: 
+<%= @user.try(:email) %>.
+ 
+The total cost for your order, <%= @order.id %>, is <%= @order.total %>
+You ordered the following items:
+<% @order.line_items.each do |item| %>
+<%= item.quantity %> <%= item.product.name %>
+Price per item: <%= item.product.price %>
+<% end %>
+
+
+Thanks for joining and have a great day!
+
+
