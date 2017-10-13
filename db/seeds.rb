@@ -136,21 +136,21 @@ cat3.products.create!({
 Review.destroy_all
 
 @hotdog_slicer.reviews.create! ({
-  product_id: 1,
+  product_id: 8,
   user_id: 1,
   description: "Amaaazing stuff",
   rating: 5
 })
 
 @hotdog_slicer.reviews.create! ({
-  product_id: 1,
+  product_id: 8,
   user_id: 4,
   description: "Eh, I was not impressed...",
   rating: 2
 })
 
 @hotdog_slicer.reviews.create! ({
-  product_id: 1,
+  product_id: 8,
   user_id: 2,
   description: "What's the return policy?",
   rating: 1
