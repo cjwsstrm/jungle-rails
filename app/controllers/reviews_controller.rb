@@ -1,12 +1,13 @@
 class ReviewsController < ApplicationController
 
+  before_filter :authenticate
   
   def create
     @review = Review.new(review_params)
     @product = Product.find(params[:product_id])
     @review.product = @product
     
-    @review.user = current_user
+    @review.user_id = current_user
     
 
     if @review.save
