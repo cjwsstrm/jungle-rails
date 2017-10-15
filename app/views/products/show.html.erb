@@ -25,29 +25,34 @@
         </dl>
       </div>
     </div>
-    <div class="row">
       
-      <div class="col-sm-8">
-        <h4>Product Reviews</h4>
+      <div class="col-sm-12">
+        <h3 class ="lead">Product Reviews</h3>
       </div>
 
-      <h4 class="col-sm-8">Review the product</h5>
+    <% user = User.all %>
     <% if current_user %>
-     <div class="col-sm-5">
+    <h4 class="text-muted">Review the product</h4>
+    <div class="col-sm-4">
       <%= render(partial: 'products/form', locals: {product: @product, reviews: @review}) %>
     </div>
     <% end %>
-      <div class="col-sm-8">
-        <% @product.reviews.order('created_at ASC').reverse.each do |review| %>
+      <div class="col-sm-6 col-sm-offset-2">
+        <% @product.reviews.order('created_at DESC').each do |review| %>
         <dl class="dl-horizontal">
           <dt>Description</dt> 
           <dd><%= review.description %></dd>
-          <dt>Rating</dt> 
+          <dt>Rating</dt>           
           <dd><%= review.rating %></dd>
+          <dt>Reviewed by</dt>
+          <dd><% @reviewer = user[review.user_id - 1] %></dd>
+          <dd><%= @reviewer.first_name %></dd>
+          <% if current_user.id == review.user_id %>
+          <dt><%= button_to "Delete", product_review_path(:product_id=>review.product_id, :id=>review.id), method: :delete, class: "btn btn-sm btn-danger" %></dt>
+          <% end %>
         </dl>
         <% end %>
       </div>
-
   </article>
 
 </section>
