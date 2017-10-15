@@ -30,35 +30,31 @@
           <% end %>
         </dl>
       </div>
-    </div>
-      
-      <div class="col-sm-12">
-        <h3 class="lead">Product Reviews</h3>
-      </div>
-
-    <% user = User.all %>
-    <% if current_user %>
-    <h4 class="text-muted">Review the product</h4>
-    <div class="col">
-      <%= render(partial: 'products/form', locals: {product: @product, reviews: @review}) %>
-    </div>
-    <% end %>
-      <div class="col">
-        <% @product.reviews.order('created_at DESC').each do |review| %>
-        <dl class="dl-horizontal">
-          <dt>Description</dt> 
+      <div class="col-sm-8">
+         <dl class="dl-horizontal">
+          <h3 class="lead">Product Reviews</h3>
+          <% @product.reviews.order('created_at DESC').each do |review| %>
+          <% user = User.all %>
+          <% @reviewer = user[review.user_id - 1] %>
+          <dt>Reviewed by: <%= @reviewer.first_name %></dt> 
           <dd><%= review.description %></dd>
           <dt>Rating</dt>           
           <dd><%= review.rating %></dd>
-          <dt>Reviewed by</dt>
-          <% @reviewer = user[review.user_id - 1] %>
-          <dd><%= @reviewer.first_name %></dd>
           <% if current_user && current_user.id == review.user_id %>
-          <dt><%= button_to "Delete", product_review_path(:product_id=>review.product_id, :id=>review.id), method: :delete, class: "btn btn-sm btn-danger" %></dt>
+          <dd><%= button_to "Delete", product_review_path(:product_id=>review.product_id, :id=>review.id), method: :delete, class: "btn btn-sm btn-danger" %></dd>
           <% end %>
+        <% end %>
         </dl>
+      </div>
+    </div>
+      <div class="row">
+        <% if current_user %>
+          <h4 class="text-muted">Review the product</h4>
+          <%= render(partial: 'products/form', locals: {product: @product, reviews: @review}) %>
         <% end %>
       </div>
+
+
   </article>
 
 </section>
