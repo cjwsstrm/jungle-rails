@@ -9,6 +9,11 @@ Login is not required to complete an order. However logged in users can review a
 After an authentication check, an admin can create new products and categories.
 
 
+## Screenshots
+![Main Page](https://github.com/cjwsstrm/jungle-rails/blob/master/public/screenshots/main%20page.png?raw=true)
+![Product Page](https://github.com/cjwsstrm/jungle-rails/blob/master/public/screenshots/product_page.png?raw=true)
+![Orders Page](https://github.com/cjwsstrm/jungle-rails/blob/master/public/screenshots/orders_page.png?raw=true)
+
 ## Setup
 
 1. Fork & Clone
