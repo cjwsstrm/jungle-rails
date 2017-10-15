@@ -2,6 +2,12 @@
 
 A mini e-commerce application built with Rails 4.2 for purposes of teaching Rails by example.
 
+## Features
+Users can browse and add items to their cart. If a user decides to make a purchase they will be shown a summary of their order upon order submission. ActionMailer Email confirmation is implemented but set to :test. Can easily be changed if desired.
+Login is not required to complete an order. However logged in users can review any product. They can also delete any review they've made.
+
+After an authentication check, an admin can create new products and categories.
+
 
 ## Setup
 
