@@ -23,23 +23,27 @@
           <dt>Price</dt>
           <dd><%= @product.price %></dd>
           <dt>Overall Rating</dt>
-          <dd><%= @product.reviews.all.average(:rating).to_f.round(2) %></dd>
+          <% if @product.reviews.all.average(:rating).to_f.round(2) == 0 %>
+            <dd>Rating: - </dd>
+          <% else %>
+            <dd><%= @product.reviews.all.average(:rating).to_f.round(2) %></dd>
+          <% end %>
         </dl>
       </div>
     </div>
       
       <div class="col-sm-12">
-        <h3 class ="lead">Product Reviews</h3>
+        <h3 class="lead">Product Reviews</h3>
       </div>
 
     <% user = User.all %>
     <% if current_user %>
     <h4 class="text-muted">Review the product</h4>
-    <div class="col-sm-4">
+    <div class="col">
       <%= render(partial: 'products/form', locals: {product: @product, reviews: @review}) %>
     </div>
     <% end %>
-      <div class="col-sm-6 col-sm-offset-2">
+      <div class="col">
         <% @product.reviews.order('created_at DESC').each do |review| %>
         <dl class="dl-horizontal">
           <dt>Description</dt> 
@@ -47,9 +51,9 @@
           <dt>Rating</dt>           
           <dd><%= review.rating %></dd>
           <dt>Reviewed by</dt>
-          <dd><% @reviewer = user[review.user_id - 1] %></dd>
+          <% @reviewer = user[review.user_id - 1] %>
           <dd><%= @reviewer.first_name %></dd>
-          <% if current_user.id == review.user_id %>
+          <% if current_user && current_user.id == review.user_id %>
           <dt><%= button_to "Delete", product_review_path(:product_id=>review.product_id, :id=>review.id), method: :delete, class: "btn btn-sm btn-danger" %></dt>
           <% end %>
         </dl>

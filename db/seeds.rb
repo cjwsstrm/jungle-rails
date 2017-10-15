@@ -144,20 +144,39 @@ Review.destroy_all
 
 @hotdog_slicer.reviews.create! ({
   product_id: 8,
-  user_id: 4,
+  user_id: 2,
   description: "Eh, I was not impressed...",
   rating: 2
 })
 
 @hotdog_slicer.reviews.create! ({
   product_id: 8,
-  user_id: 2,
+  user_id: 3,
   description: "What's the return policy?",
   rating: 1
 })
 
+User.destroy_all
 
+User.create! ({
+  first_name: "CJ",
+  last_name: "JC",
+  email: "cj@jc.com",
+  password: "test"
+})
 
+User.create! ({
+  first_name: "CJ",
+  last_name: "JC",
+  email: "cj@second.com",
+  password: "test"
+})
 
+User.create! ({
+  first_name: "ThatGuy",
+  last_name: "Yeah",
+  email: "TG@yeah.com",
+  password: "test"
+})
 
 puts "DONE!"
