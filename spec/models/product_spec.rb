@@ -2,9 +2,10 @@ require 'rails_helper'
 
 RSpec.describe Product, type: :model do
   describe 'Validations' do
+    
     it ('should be invalid without a name') do
       product = Product.new
-    expect(product).to_not be_valid
+      expect(product).to_not be_valid
       expect(product.errors.messages[:name]).to include('can\'t be blank')
     end
     
