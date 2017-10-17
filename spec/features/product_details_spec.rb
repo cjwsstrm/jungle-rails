@@ -18,16 +18,13 @@ RSpec.feature "Visitor navigates to home page", type: :feature, js: true do
   end
 
   scenario "They see the product details on a product's page" do
-    # ACT
-    visit root_path
 
-    # VERIFY
-    puts page.html
+    visit root_path
     
     first('article.product').find_link("#{@product.name}").click
       
     sleep 2
-    # DEBUG / VERIFY
+   
     save_screenshot
   end
 
