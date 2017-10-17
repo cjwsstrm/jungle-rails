@@ -14,25 +14,47 @@ RSpec.describe User, type: :model do
       expect(user).to_not be_valid
     end
 
-    it ('should be valid with confirmation match') do
-      user = User.new password: 'testere', password_confirmation: 'testere'
-      expect(user).to be_valid
-    end
-
     it('should be not be valid with a short password') do
       user = User.new password: 'shor', password_confirmation: 'shor'
       expect(user).to_not be_valid
       expect(user.errors.full_messages).to include ("Password is too short (minimum is 5 characters"')')
     end
 
+    it ('should be invalid without a first_name entered') do
+      user = User.new last_name: 'w', email: 'cj@se.com', password: 'testere', password_confirmation: 'testere'
+      user.save
+      expect(user).to_not be_valid
+      expect(user.errors.full_messages).to include ("First name can't be blank")
+    end
+
+    it ('should be invalid without a last_name entered') do
+      user = User.new first_name: 'w', email: 'cj@se.com', password: 'testere', password_confirmation: 'testere'
+      user.save
+      expect(user).to_not be_valid
+      expect(user.errors.full_messages).to include ("Last name can't be blank")
+    end
+
+    it ('should be invalid without an email entered') do
+      user = User.new first_name: 'cj', last_name: 'w', password: 'testere', password_confirmation: 'testere'
+      user.save
+      expect(user).to_not be_valid
+      expect(user.errors.full_messages).to include ("Email can't be blank")
+    end
+
+
     it ('should be invalid without a unique email') do
-      user = User.new(email: 'bugs', password: '12345')
+      user = User.new(first_name: 'cj', last_name: 'w', email: 'cj@se.com', password: 'testere', password_confirmation: 'testere')
       user.save
     
-      u = User.new(email: 'buGs', password: '12345')
+      u = User.new(first_name: 'c', last_name: 'j', email: 'cj@se.com', password: 'testere', password_confirmation: 'testere')
       u.save
     
       expect(u.errors.full_messages).to include ('Email has already been taken')
+    end
+
+    it ('should be valid with all validations met') do
+      user = User.new first_name: 'cj', last_name: 'w', email: 'cj@se.com', password: 'testere', password_confirmation: 'testere'
+      expect(user).to be_valid
     end
 
   end
