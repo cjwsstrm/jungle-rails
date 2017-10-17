@@ -66,5 +66,17 @@ RSpec.describe User, type: :model do
       expect(User.authenticate_with_credentials('cj@se.com', 'toaster')).to be nil
       expect(user.errors.full_messages)
     end
+
+    it ('should be valid if there is whitespace before or after the email') do
+      user = User.create! first_name: 'cj', last_name: 'w', email: 'cj@se.com', password: 'testere', password_confirmation: 'testere'
+      expect(User.authenticate_with_credentials(' cj@se.com', 'testere')).to be_valid
+      expect(user.errors.full_messages)
+    end
+
+    it ('should be valid if a user enters the wrong case for their email') do
+      user = User.create! first_name: 'cj', last_name: 'w', email: 'cj@se.com', password: 'testere', password_confirmation: 'testere'
+      expect(User.authenticate_with_credentials('Cj@se.com', 'testere')).to be_valid
+      expect(user.errors.full_messages)
+    end
   end
 end
