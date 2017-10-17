@@ -58,4 +58,13 @@ RSpec.describe User, type: :model do
     end
 
   end
+
+  describe ('.authenticate_with_credentials') do
+    
+    it ('should be invalid if user fails login') do
+      user = User.create! first_name: 'cj', last_name: 'w', email: 'cj@se.com', password: 'testere', password_confirmation: 'testere'
+      expect(User.authenticate_with_credentials('cj@se.com', 'toaster')).to be nil
+      expect(user.errors.full_messages)
+    end
+  end
 end
